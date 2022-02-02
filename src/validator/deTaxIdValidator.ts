@@ -8,6 +8,13 @@ function clean(input: string): ReturnType<typeof strings.cleanUnicode> {
 }
 
 const deTaxIdValidator: Validator = {
+  /**
+   * Convert the number to the minimal representation.
+   * This strips the number of any valid separators and removes surrounding
+   * whitespace
+   * @param {string} input
+   * @returns {string | exceptions.InvalidFormat}
+   */
   compact(input: string): string {
     const [value, err] = clean(input);
 
@@ -18,12 +25,22 @@ const deTaxIdValidator: Validator = {
     return value;
   },
 
+  /**
+   * Reformat the number to the standard presentation format.
+   * @param {string} input
+   * @returns {string}
+   */
   format(input: string): string {
     const [value] = clean(input);
 
     return strings.splitAt(value, 2, 5, 8).join(' ');
   },
 
+  /**
+   * Validate with error throws subclass of ValidationError
+   * @param {string} input
+   * @returns {ValidateReturn}
+   */
   validate(input: string): ValidateReturn {
     const [value, error] = clean(input);
 
