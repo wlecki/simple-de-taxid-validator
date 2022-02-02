@@ -1,5 +1,3 @@
-! 
-
 # simple-de-taxid-validator
 
 ## Important
@@ -20,13 +18,21 @@ simple-de-taxid-validator is available as an [npm package](https://www.npmjs.com
 
 ```sh
 // with npm
-npm i dropzone-ui axios
+npm i simple-de-taxid-validator
 ```
 
 ```sh
 // with yarn
-yarn add dropzone-ui axios
+yarn add simple-de-taxid-validator
 ```
+## Usage
+```ts
+import { deTaxIdValidator } from 'simple-de-taxid-validator';
+
+const { isValid } = deTaxIdValidator.validate(value);
+const formattedTaxIdNumber = deTaxIdValidator.format(value);
+```
+
 ## License
 
 This project is licensed under the terms of the
