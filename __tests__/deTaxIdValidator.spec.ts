@@ -1,7 +1,7 @@
 import { validate, format } from '../src/validator/deTaxIdValidator';
 import { InvalidLength, InvalidChecksum } from '../src/exceptions';
 
-describe('de/idnr', () => {
+describe('deTaxIdValidator', () => {
   it('format:36574261809', () => {
     const result = format('36574261809');
 

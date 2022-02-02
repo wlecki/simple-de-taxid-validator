@@ -1,10 +1,9 @@
 import * as exceptions from '../exceptions';
-import { strings } from '../util';
+import { splitAt, isDigits, cleanUnicode, iso7064mod10x11validate } from '../utils';
 import { Validator, ValidateReturn } from '../types';
-import { iso7064mod10x11validate } from '../util/iso7064';
 
-function clean(input: string): ReturnType<typeof strings.cleanUnicode> {
-  return strings.cleanUnicode(input, ' -./,');
+function clean(input: string): ReturnType<typeof cleanUnicode> {
+  return cleanUnicode(input, ' -./,');
 }
 
 const deTaxIdValidator: Validator = {
@@ -33,7 +32,7 @@ const deTaxIdValidator: Validator = {
   format(input: string): string {
     const [value] = clean(input);
 
-    return strings.splitAt(value, 2, 5, 8).join(' ');
+    return splitAt(value, 2, 5, 8).join(' ');
   },
 
   /**
@@ -50,7 +49,7 @@ const deTaxIdValidator: Validator = {
     if (value.length !== 11) {
       return { isValid: false, error: new exceptions.InvalidLength() };
     }
-    if (!strings.isDigits(value)) {
+    if (!isDigits(value)) {
       return { isValid: false, error: new exceptions.InvalidFormat() };
     }
     if (value[0] === '0') {

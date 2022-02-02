@@ -1,8 +1,6 @@
-import * as exceptions from '../../exceptions';
-
 // Map visually similar unicode values to ASCII
 // - solves the cut-n-paste from PDF/Word
-const mapped: Record<string, string> = {
+export const mapped: Record<string, string> = {
   '-': '-', // HYPHEN-MINUS
   '\u{00AD}': '-', // SOFT HYPHEN
   '\u{00AF}': '-', // MACRON
@@ -265,29 +263,3 @@ const mapped: Record<string, string> = {
   '\u{1D7F5}': '9', // MATHEMATICAL SANS-SERIF BOLD DIGIT NINE
   '\u{1D7FF}': '9', // MATHEMATICAL MONOSPACE DIGIT NINE
 };
-
-/**
- * Clean up visually similar unicode values, by default
- * trim whitespace
- */
-export function cleanUnicode(
-  value: string,
-  deletechars = ' ',
-  stripPrefix?: string,
-): [string, exceptions.InvalidFormat | null] {
-  if (typeof value !== 'string') {
-    return ['', new exceptions.InvalidFormat()];
-  }
-
-  // Don't use value.split("") -- doesn't work for "high" unicode
-  const cleaned = [...value]
-    .map((c) => mapped[c] ?? c)
-    .filter((c) => !deletechars.includes(c))
-    .join('')
-    .toLocaleUpperCase();
-
-  if (stripPrefix && cleaned.startsWith(stripPrefix)) {
-    return [cleaned.substr(stripPrefix.length), null];
-  }
-  return [cleaned, null];
-}
