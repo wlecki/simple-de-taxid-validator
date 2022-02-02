@@ -1,0 +1,41 @@
+{
+  "name": "simple-de-taxid-validator",
+  "version": "1.0.0",
+  "description": "A simple package to validate German personal TAX-ID",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib/**/*"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "tslint -p tsconfig.json",
+    "test": "jest --config jestconfig.json",
+    "prepare" : "npm run build",
+    "prepublishOnly" : "npm test && npm run lint",
+    "preversion" : "npm run lint",
+    "version" : "npm run format && git add -A src",
+    "postversion" : "git push && git push --tags"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wlecki/simple-de-taxid-validator.git"
+  },
+  "keywords": ["German", "TaxID", "Validator"],
+  "author": "wlecki",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wlecki/simple-de-taxid-validator/issues"
+  },
+  "homepage": "https://github.com/wlecki/simple-de-taxid-validator#readme",
+  "devDependencies": {
+    "@types/jest": "^27.4.0",
+    "jest": "^27.4.7",
+    "prettier": "^2.5.1",
+    "ts-jest": "^27.1.3",
+    "tslint": "^6.1.3",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^4.5.5"
+  }
+}
