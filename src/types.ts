@@ -10,20 +10,6 @@ interface ValidateSuccess {
    * Compact version of the ID
    */
   compact: string;
-
-  /**
-   * This ID identifies an individual
-   *
-   * Note: An ID may not positivily identify an individual or entity
-   */
-  isIndividual: boolean;
-
-  /**
-   * This ID identifies an entity
-   *
-   * Note: An ID may not positivily identify an individual or entity
-   */
-  isCompany: boolean;
 }
 
 interface ValidateFail {
@@ -41,25 +27,6 @@ interface ValidateFail {
 export type ValidateReturn = { error?: ValidationError } & (ValidateSuccess | ValidateFail);
 
 export interface Validator {
-  /**
-   * The type of validation: ID, tin, vat, bank,
-   */
-
-  /**
-   * The validator name, or ID's expansion name in English
-   */
-  name: string;
-
-  /**
-   * The validator name, or ID's expansion name its local name
-   */
-  localName: string;
-
-  /**
-   * The short/acronym or abbreviation of the validator
-   */
-  abbreviation?: string;
-
   /**
    * Convert the number to the minimal representation.
    * This strips the number of any valid separators and removes surrounding

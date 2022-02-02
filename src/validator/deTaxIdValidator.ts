@@ -1,18 +1,3 @@
-/**
- * IdNr (Steuerliche Identifikationsnummer, German personal tax number).
- *
- * The IdNr (or Steuer-IdNr) is a personal identification number that is
- * assigned to individuals in Germany for tax purposes and is meant to replace
- * the Steuernummer. The number consists of 11 digits and does not embed any
- * personal information.
- *
- * Source
- *   https://de.wikipedia.org/wiki/Steuerliche_Identifikationsnummer
- *   http://www.identifikationsmerkmal.de/
- *
- * PERSON
- */
-
 import * as exceptions from '../exceptions';
 import { strings } from '../util';
 import { Validator, ValidateReturn } from '../types';
@@ -22,10 +7,7 @@ function clean(input: string): ReturnType<typeof strings.cleanUnicode> {
   return strings.cleanUnicode(input, ' -./,');
 }
 
-const impl: Validator = {
-  name: 'German Personal Tax Number',
-  localName: 'Steuerliche Identifikationsnummer',
-  abbreviation: 'IdNr',
+const deTaxIdValidator: Validator = {
   compact(input: string): string {
     const [value, err] = clean(input);
 
@@ -81,10 +63,8 @@ const impl: Validator = {
     return {
       isValid: true,
       compact: value,
-      isIndividual: true,
-      isCompany: false,
     };
   },
 };
 
-export const { name, localName, abbreviation, validate, format, compact } = impl;
+export const { validate, format, compact } = deTaxIdValidator;
